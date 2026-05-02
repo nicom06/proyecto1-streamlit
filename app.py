@@ -320,7 +320,7 @@ with tab_actualizar:
 
         if st.button("Guardar cambios",key="btn_actualizar"):
             try:
-                st.session_state.inventarios[nombre_sel]=InventarioProducto(
+                st.session_state.inventario[nombre_sel]=InventarioProducto(
                     nombre_sel,nuevo_costo,nuevo_precio,nuevo_stock,nuevo_min
                 )
                 st.success(f"Producto '{nombre_sel}' actualizado correctamente.")
