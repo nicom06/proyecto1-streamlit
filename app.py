@@ -48,27 +48,25 @@ if st.session_state.movimientos:
     st.subheader("Tabla de Movimientos")
     st.dataframe(st.session_state.movimientos, use_container_width=True)
 
-total_ingresos = sum(x["Valor"] for x in st.session_state.movimientos if x["Tipo"] == "ingreso")
-total_gastos = sum(x["Valor"] for x in st.session_state.movimientos if x["Tipo"] =="gasto")
-saldo_final = total_ingresos - total_gastos
+    total_ingresos = sum(x["Valor"] for x in st.session_state.movimientos if x["Tipo"] == "ingreso")
+    total_gastos = sum(x["Valor"] for x in st.session_state.movimientos if x["Tipo"] =="gasto")
+    saldo_final = total_ingresos - total_gastos
+    st.subheader("Resumen")
+    col_ingreso, col_gasto, col_saldo = st.columns(3)
+    with col_ingreso:
+        st.metric("Total Ingresos:", f"${total_ingresos}")
+    with col_gasto:
+        st.metric("Total Gastos:", f"${total_gastos}")
+    with col_saldo:
+        st.metric("Saldo Final:", f"${saldo_final}")
 
-st.subheader("Resumen")
-col_ingreso, col_gasto, col_saldo = st.columns(3)
-
-with col_ingreso:
-    st.metric("Total Ingresos:", f"${total_ingresos}")
-with col_gasto:
-    st.metric("Total Gastos:", f"${total_gastos}")
-with col_saldo:
-    st.metric("Saldo Final:", f"${saldo_final}")
-
-st.subheader("Estado del saldo final")
-if saldo_final > 0:
-    st.success(f"Saldo a FAVOR ${saldo_final}")
-elif saldo_final < 0:
-    st.error(f"Saldo en CONTRA ${saldo_final}")
-else:
-    st.warning(f"Saldo en CERO, sin ganacia ni pérdida")
+    st.subheader("Estado del saldo final")
+    if saldo_final > 0:
+        st.success(f"Saldo a FAVOR ${saldo_final}")
+    elif saldo_final < 0:
+        st.error(f"Saldo en CONTRA ${saldo_final}")
+    else:
+        st.warning(f"Saldo en CERO, sin ganacia ni pérdida")
 
 
 #EJERCICIO 2
